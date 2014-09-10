@@ -63,5 +63,8 @@ print(verticalbargraph)
 # d. frequency table
 require(dplyr)
 
-graphdata %>%
-    mutate(relativefrequency = round(numstudents/sum(numstudents),2))
+graphdata <- graphdata %>%
+                mutate(relativefrequency = round(numstudents/sum(numstudents),2))
+
+graphdata
+
