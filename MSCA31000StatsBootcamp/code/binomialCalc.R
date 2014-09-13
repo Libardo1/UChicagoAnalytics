@@ -1,15 +1,15 @@
-binom <- function(p = .5, N, x) {
+binom <- function(N, x, p = .5) {
     (factorial(N) * p^x * (1 - p)^(N - x)) / ((factorial(x) * factorial(N - x)))
 }
 
-meanbinom <- function(p = .5, N) {
+meanbinom <- function(N, p = .5) {
     N * p
 }
 
-variancebinom <- function(p = .5, N) {
+variancebinom <- function(N, p = .5) {
     N * p * (1-p)
 }
 
-stddevbinom <- function(p = .5, N) {
-    sqrt(variancebinom(p,N))
+stddevbinom <- function(N, p = .5) {
+    sqrt(variancebinom(N,p))
 }
