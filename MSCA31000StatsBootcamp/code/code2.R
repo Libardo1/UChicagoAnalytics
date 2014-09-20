@@ -64,7 +64,7 @@ ggplot(gp,
 
 ## Q20 correlation at .01 level
 
-cor.test(angerdata$Control.Out,angerdata$Control.In, conf.level=.01)
+cor.test(angerdata$Control.Out,angerdata$Control.In, conf.level=.99)
 
 ## Q21 correlation between Anger Out and Control Out
 
