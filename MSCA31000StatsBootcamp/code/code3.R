@@ -67,3 +67,33 @@ upper_limit <- diffmeans + (t[2] * stderror)
 
 ## Ch 12 - Q 21
 
+sportdata  <- angerdata %>%
+    select(Sports, Control.In) %>%
+    mutate(sport=ifelse(Sports == 1, "athletes", "nonathletes"))
+
+sportcat <- sportdata %>%
+    group_by(sport) %>%
+    summarise(num = n(),
+              meanval=mean(Control.In),
+              varval=var(Control.In))
+
+diffmeans <- sportcat[sportcat$sport == 'nonathletes',3] - sportcat[sportcat$sport == 'athletes',3]
+
+sse_nonathletes <- sum((sportdata[sportdata$sport == "nonathletes",2] - 
+                            sportcat[sportcat$sport == 'nonathletes',3])^2)
+
+sse_athletes <- sum((sportdata[sportdata$sport == "athletes",2] - 
+                         sportcat[sportcat$sport == 'athletes',3])^2)
+
+mse <- (sse_nonathletes + sse_athletes)/(sum(sportcat$num) - 2)
+
+nh <- 2 / ((1/sportcat[sportcat$sport == "nonathletes",2]) + 
+               (1/sportcat[sportcat$sport == "athletes",2]))
+
+stderror <- sqrt(2*mse/nh)
+
+t <- qt(c(.025,.975),(sum(sportcat$num) - 2))
+
+lower_limit <- diffmeans + (t[1] * stderror)
+
+upper_limit <- diffmeans + (t[2] * stderror)
